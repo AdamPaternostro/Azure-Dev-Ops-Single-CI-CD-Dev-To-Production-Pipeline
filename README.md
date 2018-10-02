@@ -53,7 +53,7 @@ Customer will build two pipelines.
  7. For the Success Criteria enter: eq(root['status'], 'successful')
  8. Under Evaluation Options select "On Successful Gates, ask for approvals" (we want the gates to execute first, before approvals).
  9. You should set how long you want this gate to re-try.  This depends on how long you typically wait between a dev release and you push to QA.
- 10. TO DO: Evaluate how many parrallel jobs are needed!!!!!!!!!!!!!!
+ 10. ISSUE: Currently the releases are getting queued since I only have 1 hosted agent.  We do not want these to queue up if we have tons of CI/CD occurring....  Researching a solution.
 
 #### QA Gate approvals
 ![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/QA-Gate-Approval-Setting.png)
