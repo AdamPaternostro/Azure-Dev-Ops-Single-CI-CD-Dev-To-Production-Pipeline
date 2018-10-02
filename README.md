@@ -16,13 +16,11 @@ If you have lots source control check-ins through out the day, you get the above
 
 ## What I have seen:
 Customer will build two pipelines.
-1. Dev
-  a. Steps 1 through 4 from above still apply, but there is no link to QA.  
-     ![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/SeperateDevRelease.png)
+1. Dev: Steps 1 through 4 from above still apply, but there is no link to QA.  
+![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/SeperateDevRelease.png)
 
-2. QA-Prod
-  a. Steps 5 and 6 are put in a different pipeline which needs to be kicked off.  And even worse I have seen step 2 (a new build) occur in this pipeline.  You should only build your code once!  Building for Dev and then building for QA-Prod introduces the possiblility of different code being compiled.
-     ![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/SeperateQAProdRelease.png)
+2. QA-Prod: Steps 5 and 6 are put in a different pipeline which needs to be kicked off.  And even worse I have seen step 2 (a new build) occur in this pipeline.  You should only build your code once!  Building for Dev and then building for QA-Prod introduces the possiblility of different code being compiled.
+![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/SeperateQAProdRelease.png)
 
 ## The solution
 1. Implement the Ideal pipeline
