@@ -66,9 +66,9 @@ Customer will build two pipelines.
 ![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/QA-Gate-Approval-Setting.png)
 
 #### QA Deployment Queue Settings 
-![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/QA-Change-Parallel-Deployments)
+![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/QA-Change-Parallel-Deployments.png)
 
-![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/QA-Change-Parallel-Unlimited)
+![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/QA-Change-Parallel-Unlimited.png)
 
 #### QA Gate failure since Build is not Tagged
 ![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/Gate-Failed.png)
