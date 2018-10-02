@@ -1,5 +1,5 @@
 # Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline
-A common pattern I have seen customers implementing in their DevOps strategy is to have two seperate pipelines for Dev and QA-Prod.  Their Dev pipeline is full CI/CD so each source control check-in triggers a build and also triggers their release pipeline.  This pipeline only has one stage named Dev and then a entirely seperate pipeline is created for QA/Production.  The main reason I have heard from customers for the two pipelines versus just one, is that they are worried a check-in to source control will possibly make it to QA or Production when the customer is not ready for the release.  Also, they do not want to "reject" every single CI/CD release to Dev from making it to QA.  
+A common pattern I have seen customers implementing in their DevOps strategy is to have two separate pipelines for Dev and QA-Prod.  Their Dev pipeline is full CI/CD so each source control check-in triggers a build and also triggers their release pipeline.  This pipeline only has one stage named Dev and then a entirely separate pipeline is created for QA/Production.  The main reason I have heard from customers for the two pipelines versus just one, is that they are worried a check-in to source control will possibly make it to QA or Production when the customer is not ready for the release.  Also, they do not want to "reject" every single CI/CD release to Dev from making it to QA.  
 
 ## Ideal pattern:
 1. Code is checked into source control
@@ -12,14 +12,14 @@ A common pattern I have seen customers implementing in their DevOps strategy is 
 ![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/Ideal-Pipeline.png)
 
 ## The Issue:
-If you have lots source control check-ins through out the day, you get the above steps executing each and every time, but you really do not want to reject the code to prevent a release to QA for each check in.  Your apporval person will probably get pretty annoyed.  
+If you have lots source control check-ins throughout the day, you get the above steps executing each and every time, but you really do not want to reject the code to prevent a release to QA for each check in.  Your approval person will probably get pretty annoyed.  
 
 ## What I have seen:
 Customer will build two pipelines.
 1. Dev: Steps 1 through 4 from above still apply, but there is no link to QA.  
 ![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/SeperateDevRelease.png)
 
-2. QA-Prod: Steps 5 and 6 are put in a different pipeline which needs to be kicked off.  And even worse I have seen step 2 (a new build) occur in this pipeline.  You should only build your code once!  Building for Dev and then building for QA-Prod introduces the possiblility of different code being compiled.
+2. QA-Prod: Steps 5 and 6 are put in a different pipeline which needs to be kicked off.  And even worse I have seen step 2 (a new build) occur in this pipeline.  You should only build your code once!  Building for Dev and then building for QA-Prod introduces the possibility of different code being compiled.
 ![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/SeperateQAProdRelease.png)
 
 ## The solution
@@ -27,7 +27,7 @@ Customer will build two pipelines.
 2. In Step 5 add the following:
   a. Keep our normal approval process to QA
   b. Add a Gate
-  c. The Gate will wait unti the Build has a Bulid Tag applied
+  c. The Gate will wait until the Build has a Build Tag applied
   d. Once the Build tag is applied the release will continue
   e. The approval to QA is performed and everything works as normal
 
@@ -53,7 +53,7 @@ Customer will build two pipelines.
  7. For the Success Criteria enter: eq(root['status'], 'successful')
  8. Under Evaluation Options select "On Successful Gates, ask for approvals" (we want the gates to execute first, before approvals).
  9. You should set how long you want this gate to re-try.  This depends on how long you typically wait between a dev release and you push to QA.
- 10. ISSUE: Currently the releases are getting queued since I only have 1 hosted agent.  We do not want these to queue up if we have tons of CI/CD occurring....  Researching a solution.
+ 10. You also need to set the number of parallel deployments for the QA stage to Unlimited.  This means we will have many release pipelines attempting to release at the same time.  So, once a build is tagged that release will move forward.  You have to be aware that tagging a bunch of builds at the same time would trigger many releases to QA simultaneously.
 
 #### QA Gate approvals
 ![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/QA-Gate-Approval-Setting.png)
@@ -64,6 +64,11 @@ Customer will build two pipelines.
 ![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/QA-Gate-2.png)
 
 ![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/QA-Gate-Approval-Setting.png)
+
+#### QA Deployment Queue Settings 
+![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/QA-Change-Parallel-Deployments)
+
+![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/QA-Change-Parallel-Unlimited)
 
 #### QA Gate failure since Build is not Tagged
 ![alt tag](https://raw.githubusercontent.com/AdamPaternostro/Azure-Dev-Ops-Single-CI-CD-Dev-To-Production-Pipeline/master/images/Gate-Failed.png)
