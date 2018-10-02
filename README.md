@@ -25,11 +25,11 @@ Customer will build two pipelines.
 ## The solution
 1. Implement the Ideal pipeline
 2. In Step 5 add the following:
-  a. Keep our normal approval process to QA
-  b. Add a Gate
-  c. The Gate will wait until the Build has a Build Tag applied (this is a tag on your build, not your source control)
-  d. Once the Build tag is applied the release will continue
-  e. The approval to QA is performed and everything works as normal
+    1. Keep our normal approval process to QA
+    2. Add a Gate
+    3. The Gate will wait until the Build has a Build Tag applied (this is a tag on your build, not your source control)
+    4. Once the Build tag is applied the release will continue
+    5. The approval to QA is performed and everything works as normal
 
 ### How to setup the build tag gate
 1. Copy the Azure Function that is in this repository and deploy
